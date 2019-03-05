@@ -1,0 +1,49 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 0
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/Los_Angeles
+  # Customization file
+  customize: !include customize.yaml
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Show the introduction message on startup.
+introduction:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
+# http:
+#   base_url: wuch.virtual-ip.org:8123
+#   ssl_certificate: /ssl/fullchain.pem
+#   ssl_key: /ssl/privkey.pem
+
+
+# Sensors
+sensor:
+  # Weather prediction
+  - platform: yr
+
+# Text to speech
+tts:
+  - platform: google
+
+logger:
+  default: debug
+
+shell_command:
+  curlddnsnoarg: '/bin/bash /config/bash/curl-virtual-ip.bash'
+  curlddns: '/bin/bash /config/bash/curl-virtual-ip.bash {{ !secret virtual_ip_user }} {{ !secret virtual_ip_passwd }} {{ !secret virtual_ip_host }}'
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml

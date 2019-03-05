@@ -1,0 +1,9 @@
+scriptddns:
+  sequence:
+  - service: shell_command.curlddns
+  alias: scriptddns
+
+scriptddnsnoarg:
+  sequence:
+  - service: shell_command.curlddnsnoarg
+  alias: scriptddnsnoarg

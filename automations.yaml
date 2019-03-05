@@ -1,0 +1,8 @@
+- id: '1551597338315'
+  alias: Update virtual-ip DDNS
+  trigger:
+  - at: '23:20:00'
+    platform: time
+  condition: []
+  action:
+  - service: shell_command.curlddnsnoarg
